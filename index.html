@@ -240,11 +240,11 @@
 <script>
 const COLORS = {"happiness": {"Norway": "#b2d5b3", "Sweden": "#a7cca8", "Denmark": "#82af84", "Finland": "#538a56", "Iceland": "#82af84"}, "sunshine": {"Norway": "#86b288", "Sweden": "#39763e", "Denmark": "#5b905e", "Finland": "#37743b", "Iceland": "#99c19a"}, "ev": {"Norway": "#216326", "Sweden": "#609463", "Denmark": "#558c59", "Finland": "#679969", "Iceland": "#6fa072"}, "renewable": {"Norway": "#46804a", "Sweden": "#588e5b", "Denmark": "#88b48a", "Finland": "#7caa7e", "Iceland": "#3e7942"}};
 
-const DATA = {"Norway": {"happiness": 7.3, "sunshine": 1376, "ev": 96, "renewable": 75.0, "flag": "🇳🇴"}, "Sweden": {"happiness": 7.35, "sunshine": 1821, "ev": 60, "renewable": 64.7, "flag": "🇸🇪"}, "Denmark": {"happiness": 7.52, "sunshine": 1629, "ev": 66, "renewable": 36.7, "flag": "🇩🇰"}, "Finland": {"happiness": 7.74, "sunshine": 1838, "ev": 56, "renewable": 43.7, "flag": "🇫🇮"}, "Iceland": {"happiness": 7.52, "sunshine": 1268, "ev": 51, "renewable": 79.5, "flag": "🇮🇸"}};
+const DATA = {"Norway": {"happiness": 7.24, "sunshine": 140, "ev": 96, "renewable": 76.7, "flag": "🇳🇴"}, "Sweden": {"happiness": 7.25, "sunshine": 160, "ev": 60, "renewable": 66.4, "flag": "🇸🇪"}, "Denmark": {"happiness": 7.54, "sunshine": 136, "ev": 66, "renewable": 43.7, "flag": "🇩🇰"}, "Finland": {"happiness": 7.76, "sunshine": 153, "ev": 56, "renewable": 50.8, "flag": "🇫🇮"}, "Iceland": {"happiness": 7.54, "sunshine": 111,  "ev": 51, "renewable": 80.9, "flag": "🇮🇸"}};
 
 const INDICATORS = {
   happiness: {label:'😊 Happiness Score', unit:'/ 10', decimals:2, max:8.0, min:7.2},
-  sunshine:  {label:'☀️ Sunshine Hours',  unit:'h/yr', decimals:0, max:2000, min:1000},
+  sunshine:  {label:'☀️ Average Sunshine Hours',  unit:'h/yr', decimals:0, max:2000, min:1000},
   ev:        {label:'⚡ EV Share',         unit:'%',    decimals:0, max:100,  min:0},
   renewable: {label:'🌿 Renewable Energy', unit:'%',    decimals:1, max:100,  min:0},
 };
