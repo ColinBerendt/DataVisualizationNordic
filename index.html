@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
     <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
@@ -14,45 +13,41 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
     
-            <meta name="viewport" content="width=device-width,
-                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-            <style>
-                #map_688e524207fb1e7b8eff3c60348f41cc {
-                    position: relative;
-                    width: 100.0%;
-                    height: 100.0%;
-                    left: 0.0%;
-                    top: 0.0%;
-                }
-                .leaflet-container { font-size: 1rem; }
-            </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style>
+        #map_688e524207fb1e7b8eff3c60348f41cc {
+            position: relative;
+            width: 100.0%;
+            height: 100.0%;
+            left: 0.0%;
+            top: 0.0%;
+        }
+        .leaflet-container { font-size: 1rem; }
+    </style>
 
-            <style>html, body {
-                width: 100%;
-                height: 100%;
-                margin: 0;
-                padding: 0;
-            }
-            </style>
+    <style>html, body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
+    </style>
 
-            <style>#map {
-                position:absolute;
-                top:0;
-                bottom:0;
-                right:0;
-                left:0;
-                }
-            </style>
+    <style>#map {
+        position:absolute;
+        top:0;
+        bottom:0;
+        right:0;
+        left:0;
+        }
+    </style>
 
-            <script>
-                L_NO_TOUCH = false;
-                L_DISABLE_3D = false;
-            </script>
-
-        
+    <script>
+        L_NO_TOUCH = false;
+        L_DISABLE_3D = false;
+    </script>
 </head>
 <body>
-    
     
 <style>
   .leaflet-container { font-family: 'Segoe UI', sans-serif; }
@@ -165,11 +160,10 @@
     <button class="ind-btn active" data-ind="happiness" onclick="setIndicator('happiness')">😊 Happiness Score</button>
     <button class="ind-btn" data-ind="sunshine" onclick="setIndicator('sunshine')">☀️ Average Sunshine Hours</button>
     <button class="ind-btn" data-ind="ev" onclick="setIndicator('ev')">⚡ Electric Vehicle Share</button>
-    <button class="ind-btn" data-ind="renewable" onclick="setIndicator('renewable')">🌿 Renewable Energy</button>
+    <button class="ind-btn" data-ind="renewable" onclick="setIndicator('renewable')">🌿 Renewable Energy Consumption</button>
   </div>
   <div id="sidebar-list">
-    
-    <div class="si" id="si-Norway" onclick="selectCountry('Norway')">
+    <div class="si" id="si-Norway" onclick="selectCountry('Norway', true)">
       <span style="font-size:20px">🇳🇴</span>
       <div style="flex:1">
         <div style="font-weight:600;font-size:13px;color:#1a1a1a">Norway</div>
@@ -179,7 +173,7 @@
         <div class="si-bar" id="sib-Norway"></div>
       </div>
     </div>
-    <div class="si" id="si-Sweden" onclick="selectCountry('Sweden')">
+    <div class="si" id="si-Sweden" onclick="selectCountry('Sweden', true)">
       <span style="font-size:20px">🇸🇪</span>
       <div style="flex:1">
         <div style="font-weight:600;font-size:13px;color:#1a1a1a">Sweden</div>
@@ -189,7 +183,7 @@
         <div class="si-bar" id="sib-Sweden"></div>
       </div>
     </div>
-    <div class="si" id="si-Denmark" onclick="selectCountry('Denmark')">
+    <div class="si" id="si-Denmark" onclick="selectCountry('Denmark', true)">
       <span style="font-size:20px">🇩🇰</span>
       <div style="flex:1">
         <div style="font-weight:600;font-size:13px;color:#1a1a1a">Denmark</div>
@@ -199,7 +193,7 @@
         <div class="si-bar" id="sib-Denmark"></div>
       </div>
     </div>
-    <div class="si" id="si-Finland" onclick="selectCountry('Finland')">
+    <div class="si" id="si-Finland" onclick="selectCountry('Finland', true)">
       <span style="font-size:20px">🇫🇮</span>
       <div style="flex:1">
         <div style="font-weight:600;font-size:13px;color:#1a1a1a">Finland</div>
@@ -209,7 +203,7 @@
         <div class="si-bar" id="sib-Finland"></div>
       </div>
     </div>
-    <div class="si" id="si-Iceland" onclick="selectCountry('Iceland')">
+    <div class="si" id="si-Iceland" onclick="selectCountry('Iceland', true)">
       <span style="font-size:20px">🇮🇸</span>
       <div style="flex:1">
         <div style="font-weight:600;font-size:13px;color:#1a1a1a">Iceland</div>
@@ -243,15 +237,15 @@ const COLORS = {"happiness": {"Norway": "#b2d5b3", "Sweden": "#a7cca8", "Denmark
 const DATA = {"Norway": {"happiness": 7.24, "sunshine": 140, "ev": 96, "renewable": 76.7, "flag": "🇳🇴"}, "Sweden": {"happiness": 7.25, "sunshine": 160, "ev": 60, "renewable": 66.4, "flag": "🇸🇪"}, "Denmark": {"happiness": 7.54, "sunshine": 136, "ev": 66, "renewable": 43.7, "flag": "🇩🇰"}, "Finland": {"happiness": 7.76, "sunshine": 153, "ev": 56, "renewable": 50.8, "flag": "🇫🇮"}, "Iceland": {"happiness": 7.54, "sunshine": 111,  "ev": 51, "renewable": 80.9, "flag": "🇮🇸"}};
 
 const INDICATORS = {
-  happiness: {label:'😊 Happiness Score', unit:'/ 10', decimals:2, max:8.0, min:7.2},
-  sunshine:  {label:'☀️ Average Sunshine Hours',  unit:'h/yr', decimals:0, max:2000, min:1000},
-  ev:        {label:'⚡ Electric Vehicle Share',         unit:'%',    decimals:0, max:100,  min:0},
-  renewable: {label:'🌿 Renewable Energy', unit:'%',    decimals:1, max:100,  min:0},
+  happiness: {label:'😊 Happiness Score', unit:'/ 10', decimals:2},
+  sunshine:  {label:'☀️ Average Sunshine Hours',  unit:'h/yr', decimals:0},
+  ev:        {label:'⚡ Electric Vehicle Share',         unit:'%',    decimals:0},
+  renewable: {label:'🌿 Renewable Energy Consumption', unit:'%',    decimals:1},
 };
 
-
 let currentInd = 'happiness';
-let selectedCountry = null;
+// Globaler Speicher für die Karten-Layer der Länder
+let mapLayers = {};
 
 function fmt(val, ind) {
   const d = INDICATORS[ind].decimals;
@@ -266,17 +260,15 @@ function updateSidebar() {
 
   entries.forEach(([name, d]) => {
     const val = d[currentInd];
-    const pct = ((val - minVal) / (maxVal - minVal) * 100).toFixed(0);
+    const pct = maxVal === minVal ? 100 : ((val - minVal) / (maxVal - minVal) * 100).toFixed(0);
     const sivEl = document.getElementById('siv-' + name);
     const sibEl = document.getElementById('sib-' + name);
     if (sivEl) sivEl.textContent = fmt(val, currentInd) + ' ' + ind.unit;
     if (sibEl) sibEl.style.width = pct + '%';
-    // Reorder list items
     const siEl = document.getElementById('si-' + name);
     if (siEl) document.getElementById('sidebar-list').appendChild(siEl);
   });
 
-  // Colorbar
   document.getElementById('cb-high').textContent = fmt(maxVal, currentInd) + ' ' + INDICATORS[currentInd].unit;
   document.getElementById('cb-low').textContent  = fmt(minVal, currentInd) + ' ' + INDICATORS[currentInd].unit;
   document.getElementById('cb-mid').textContent  = fmt((maxVal+minVal)/2, currentInd);
@@ -290,466 +282,175 @@ function setIndicator(ind) {
   document.querySelector('[data-ind="' + ind + '"]').classList.add('active');
   updateSidebar();
 
-  // Recolor map layers
-  document.querySelectorAll('.leaflet-pane path').forEach(path => {
-    // We identify by tooltips — simpler: just update fill via stored color
-  });
-
-  // Folium layers: recolor by updating SVG fills
-  const layers = document.querySelectorAll('.leaflet-overlay-pane path');
-  let i = 0;
-  const names = ['Norway','Sweden','Denmark','Finland','Iceland'];
-  // Each country has multiple paths — group by data-name attr or use index
-  // Simpler: store name on path during render
-  layers.forEach(path => {
-    const name = path.getAttribute('data-country');
-    if (name && COLORS[ind] && COLORS[ind][name]) {
-      path.style.fill = COLORS[ind][name];
+  // Map korrekt über Leaflets API neu einfärben
+  Object.keys(mapLayers).forEach(name => {
+    if (COLORS[ind] && COLORS[ind][name]) {
+      mapLayers[name].setStyle({
+        fillColor: COLORS[ind][name]
+      });
     }
   });
 }
 
-function selectCountry(name) {
+function selectCountry(name, triggerMapClick = false) {
   document.querySelectorAll('.si').forEach(s => s.classList.remove('active'));
   const el = document.getElementById('si-' + name);
   if (el) el.classList.add('active');
-}
 
-// Tag SVG paths with country names after map loads
-window.addEventListener('load', function() {
-  setTimeout(() => {
-    // Assign data-country to each GeoJson path
-    const names = ['Norway', 'Sweden', 'Denmark', 'Finland', 'Iceland'];
-    const layers = document.querySelectorAll('.leaflet-overlay-pane g');
-    layers.forEach((g, i) => {
-      if (i < names.length) {
-        g.querySelectorAll('path').forEach(p => {
-          p.setAttribute('data-country', names[i]);
-        });
-      }
-    });
-    updateSidebar();
-  }, 800);
-});
+  if (triggerMapClick && mapLayers[name]) {
+    mapLayers[name].openPopup();
+  }
+}
 </script>
-    
-            <div class="folium-map" id="map_688e524207fb1e7b8eff3c60348f41cc" ></div>
+
+<div class="folium-map" id="map_688e524207fb1e7b8eff3c60348f41cc" ></div>
         
-</body>
 <script>
-    
-    
-            var map_688e524207fb1e7b8eff3c60348f41cc = L.map(
-                "map_688e524207fb1e7b8eff3c60348f41cc",
-                {
-                    center: [65.0, 15.0],
-                    crs: L.CRS.EPSG3857,
-                    ...{
-  "zoom": 4,
-  "zoomControl": true,
-  "preferCanvas": true,
-}
-
-                }
-            );
-
-            
-
-        
-    
-            var tile_layer_fe6c257f745b35a89b786bb52149b7e5 = L.tileLayer(
-                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-                {
-  "minZoom": 0,
-  "maxZoom": 20,
-  "maxNativeZoom": 20,
-  "noWrap": false,
-  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors \u0026copy; \u003ca href=\"https://carto.com/attributions\"\u003eCARTO\u003c/a\u003e",
-  "subdomains": "abcd",
-  "detectRetina": false,
-  "tms": false,
-  "opacity": 1,
-}
-
-            );
-        
-    
-            tile_layer_fe6c257f745b35a89b786bb52149b7e5.addTo(map_688e524207fb1e7b8eff3c60348f41cc);
-        
-    
-        function geo_json_98b40b7ecc4279f3f4b59b9bea0f4957_styler(feature) {
-            switch(feature.id) {
-                default:
-                    return {"color": "white", "fillColor": "#b2d5b3", "fillOpacity": 0.85, "weight": 2};
-            }
+    var map_688e524207fb1e7b8eff3c60348f41cc = L.map(
+        "map_688e524207fb1e7b8eff3c60348f41cc",
+        {
+            center: [65.0, 15.0],
+            crs: L.CRS.EPSG3857,
+            zoom: 4,
+            zoomControl: true,
+            preferCanvas: true
         }
-        function geo_json_98b40b7ecc4279f3f4b59b9bea0f4957_highlighter(feature) {
-            switch(feature.id) {
-                default:
-                    return {"color": "#333", "fillOpacity": 1.0, "weight": 3};
-            }
+    );
+
+    var tile_layer_fe6c257f745b35a89b786bb52149b7e5 = L.tileLayer(
+        "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+        {
+          "attribution": "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors &copy; <a href=\"https://carto.com/attributions\">CARTO</a>",
+          "subdomains": "abcd"
         }
+    );
+    tile_layer_fe6c257f745b35a89b786bb52149b7e5.addTo(map_688e524207fb1e7b8eff3c60348f41cc);
 
-        function geo_json_98b40b7ecc4279f3f4b59b9bea0f4957_onEachFeature(feature, layer) {
+    // Hilfsfunktion zur Erstellung dynamischer Popups basierend auf DATA
+    function generateDynamicPopupHtml(countryName) {
+        const cData = DATA[countryName];
+        let colorBorder = "#3b82f6";
+        if (countryName === "Norway") colorBorder = "#ef4444";
+        if (countryName === "Denmark") colorBorder = "#f59e0b";
+        if (countryName === "Iceland") colorBorder = "#8b5cf6";
+        if (countryName === "Finland") colorBorder = "#10b981";
 
-            layer.on({
-                mouseout: function(e) {
-                    if(typeof e.target.setStyle === "function"){
-                            geo_json_98b40b7ecc4279f3f4b59b9bea0f4957.resetStyle(e.target);
-                    }
-                },
-                mouseover: function(e) {
-                    if(typeof e.target.setStyle === "function"){
-                        const highlightStyle = geo_json_98b40b7ecc4279f3f4b59b9bea0f4957_highlighter(e.target.feature)
-                        e.target.setStyle(highlightStyle);
-                    }
-                },
-            });
-        };
-        var geo_json_98b40b7ecc4279f3f4b59b9bea0f4957 = L.geoJson(null, {
-                onEachFeature: geo_json_98b40b7ecc4279f3f4b59b9bea0f4957_onEachFeature,
-            
-                style: geo_json_98b40b7ecc4279f3f4b59b9bea0f4957_styler,
-            ...{
-}
+        return `
+        <div style="font-family:'Segoe UI',system-ui,sans-serif;width:280px;padding:4px">
+          <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid ${colorBorder}">
+            <span style="font-size:30px">${cData.flag}</span>
+            <div>
+              <div style="font-size:19px;font-weight:700;color:#1a1a1a">${countryName}</div>
+              <div style="font-size:11px;color:#888">Nordic Country · 2025 Data</div>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+            <div style="background:#f8f9fa;border-radius:8px;padding:10px 12px;border-left:3px solid ${colorBorder}">
+              <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;margin-bottom:3px">😊 Happiness</div>
+              <div style="font-size:19px;font-weight:700;color:#1a1a1a">${fmt(cData.happiness, 'happiness')} <span style="font-size:12px;font-weight:400;color:#888">/ 10</span></div>
+            </div>
+            <div style="background:#f8f9fa;border-radius:8px;padding:10px 12px;border-left:3px solid ${colorBorder}">
+              <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;margin-bottom:3px">☀️ Sunshine</div>
+              <div style="font-size:19px;font-weight:700;color:#1a1a1a">${fmt(cData.sunshine, 'sunshine')} <span style="font-size:12px;font-weight:400;color:#888">h/yr</span></div>
+            </div>
+            <div style="background:#f8f9fa;border-radius:8px;padding:10px 12px;border-left:3px solid ${colorBorder}">
+              <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;margin-bottom:3px">⚡ EV Share</div>
+              <div style="font-size:19px;font-weight:700;color:#1a1a1a">${fmt(cData.ev, 'ev')} <span style="font-size:12px;font-weight:400;color:#888">%</span></div>
+            </div>
+            <div style="background:#f8f9fa;border-radius:8px;padding:10px 12px;border-left:3px solid ${colorBorder}">
+              <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;margin-bottom:3px">🌿 Renewables</div>
+              <div style="font-size:19px;font-weight:700;color:#1a1a1a">${fmt(cData.renewable, 'renewable')} <span style="font-size:12px;font-weight:400;color:#888">%</span></div>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function setupGeoJsonLayer(geojsonObj, countryName, initialColor) {
+        geojsonObj.setStyle({"color": "white", "fillColor": initialColor, "fillOpacity": 0.85, "weight": 2});
+        
+        geojsonObj.on({
+            mouseout: function(e) { geojsonObj.resetStyle(e.target); },
+            mouseover: function(e) { e.target.setStyle({"color": "#333", "fillOpacity": 1.0, "weight": 3}); },
+            click: function(e) { selectCountry(countryName, false); }
         });
 
-        function geo_json_98b40b7ecc4279f3f4b59b9bea0f4957_add (data) {
-            geo_json_98b40b7ecc4279f3f4b59b9bea0f4957
-                .addData(data);
-        }
-            geo_json_98b40b7ecc4279f3f4b59b9bea0f4957_add({"features": [{"geometry": {"coordinates": [[[[15.14282, 79.67431], [15.52255, 80.01608], [16.99085, 80.05086], [18.25183, 79.70175], [21.54383, 78.95611], [19.02737, 78.5626], [18.47172, 77.82669], [17.59441, 77.63796], [17.1182, 76.80941], [15.91315, 76.77045], [13.76259, 77.38035], [14.66956, 77.73565], [13.1706, 78.02493], [11.22231, 78.8693], [10.44453, 79.65239], [13.17077, 80.01046], [13.71852, 79.66039], [15.14282, 79.67431]]], [[[31.101042, 69.558101], [29.39955, 69.15692], [28.59193, 69.064777], [29.015573, 69.766491], [27.732292, 70.164193], [26.179622, 69.825299], [25.689213, 69.092114], [24.735679, 68.649557], [23.66205, 68.891247], [22.356238, 68.841741], [21.244936, 69.370443], [20.645593, 69.106247], [20.025269, 69.065139], [19.87856, 68.407194], [17.993868, 68.567391], [17.729182, 68.010552], [16.768879, 68.013937], [16.108712, 67.302456], [15.108411, 66.193867], [13.55569, 64.787028], [13.919905, 64.445421], [13.571916, 64.049114], [12.579935, 64.066219], [11.930569, 63.128318], [11.992064, 61.800362], [12.631147, 61.293572], [12.300366, 60.117933], [11.468272, 59.432393], [11.027369, 58.856149], [10.356557, 59.469807], [8.382, 58.313288], [7.048748, 58.078884], [5.665835, 58.588155], [5.308234, 59.663232], [4.992078, 61.970998], [5.9129, 62.614473], [8.553411, 63.454008], [10.527709, 64.486038], [12.358347, 65.879726], [14.761146, 67.810642], [16.435927, 68.563205], [19.184028, 69.817444], [21.378416, 70.255169], [23.023742, 70.202072], [24.546543, 71.030497], [26.37005, 70.986262], [28.165547, 71.185474], [31.293418, 70.453788], [30.005435, 70.186259], [31.101042, 69.558101]]], [[[27.407506, 80.056406], [25.924651, 79.517834], [23.024466, 79.400012], [20.075188, 79.566823], [19.897266, 79.842362], [18.462264, 79.85988], [17.368015, 80.318896], [20.455992, 80.598156], [21.907945, 80.357679], [22.919253, 80.657144], [25.447625, 80.40734], [27.407506, 80.056406]]], [[[24.72412, 77.85385], [22.49032, 77.44493], [20.72601, 77.67704], [21.41611, 77.93504], [20.8119, 78.25463], [22.88426, 78.45494], [23.28134, 78.07954], [24.72412, 77.85385]]]], "type": "MultiPolygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
-
+        geojsonObj.bindTooltip(`<div style="font-family:'Segoe UI',sans-serif;font-size:13px"><b>${countryName}</b> · Click for details</div>`, {"sticky": true});
         
-    
-            geo_json_98b40b7ecc4279f3f4b59b9bea0f4957.bindTooltip(
-                `<div style="font-family:\u0027Segoe UI\u0027,sans-serif;font-size:13px">
-                     <b>Norway</b> · Click for details
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-        var popup_1d6a964285cd853680b24e79baa38a74 = L.popup({
-  "maxWidth": 300,
-});
-
-        
-            
-                var html_2bc1962e422c0a64e6d1b4ed20f7df64 = $(`<div id="html_2bc1962e422c0a64e6d1b4ed20f7df64" style="width: 100.0%; height: 100.0%;">     <div style="font-family:'Segoe UI',system-ui,sans-serif;width:280px;padding:4px">       <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid #ef4444">         <span style="font-size:30px">🇳🇴</span>         <div>           <div style="font-size:19px;font-weight:700;color:#1a1a1a">Norway</div>           <div style="font-size:11px;color:#888">Nordic Country · 2025 Data</div>         </div>       </div>       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">                  <div style="background:#f8f9fa;border-radius:8px;padding:10px 12px;border-left:3px solid #ef4444">           <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;margin-bottom:3px">😊 Happiness</div>           <div style="font-size:19px;font-weight:700;color:#1a1a1a">7.30 <span style="font-size:12px;font-weight:400;color:#888">/ 10</span></div>           <div style="font-size:9px;color:#bbb;margin-top:1px">World Happiness Report 2025</div>         </div>         <div style="background:#f8f9fa;border-radius:8px;padding:10px 12px;border-left:3px solid #ef4444">           <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;margin-bottom:3px">☀️ Sunshine</div>           <div style="font-size:19px;font-weight:700;color:#1a1a1a">1376 <span style="font-size:12px;font-weight:400;color:#888">h/yr</span></div>           <div style="font-size:9px;color:#bbb;margin-top:1px">weather-and-climate.com</div>         </div>         <div style="background:#f8f9fa;border-radius:8px;padding:10px 12px;border-left:3px solid #ef4444">           <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;margin-bottom:3px">⚡ EV Share</div>           <div style="font-size:19px;font-weight:700;color:#1a1a1a">96 <span style="font-size:12px;font-weight:400;color:#888">%</span></div>           <div style="font-size:9px;color:#bbb;margin-top:1px">ICCT Jan–May 2025</div>         </div>         <div style="background:#f8f9fa;border-radius:8px;padding:10px 12px;border-left:3px solid #ef4444">           <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;margin-bottom:3px">🌿 Renewables</div>           <div style="font-size:19px;font-weight:700;color:#1a1a1a">75.0 <span style="font-size:12px;font-weight:400;color:#888">%</span></div>           <div style="font-size:9px;color:#bbb;margin-top:1px">Eurostat/EEA 2022</div>         </div>       </div>                <div style="margin-top:12px;padding-top:10px;border-top:1px solid #eee">           <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#999;margin-bottom:8px">Electricity Mix (EIA 2022)</div>                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">               <div style="width:120px;font-size:11px;color:#666">Hydropower</div>               <div style="flex:1;background:#f0f0f0;border-radius:4px;height:8px;overflow:hidden">                 <div style="width:89.0%;background:#3b82f6;height:100%;border-radius:4px"></div>               </div>               <div style="font-size:11px;font-weight:600;width:35px;text-align:right">89.0%</div>             </div>             <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">               <div style="width:120px;font-size:11px;color:#666">Wind & Renewables</div>               <div style="flex:1;background:#f0f0f0;border-radius:4px;height:8px;overflow:hidden">                 <div style="width:10.8%;background:#10b981;height:100%;border-radius:4px"></div>               </div>               <div style="font-size:11px;font-weight:600;width:35px;text-align:right">10.8%</div>             </div>             <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">               <div style="width:120px;font-size:11px;color:#666">Fossil Fuels</div>               <div style="flex:1;background:#f0f0f0;border-radius:4px;height:8px;overflow:hidden">                 <div style="width:0.4%;background:#ef4444;height:100%;border-radius:4px"></div>               </div>               <div style="font-size:11px;font-weight:600;width:35px;text-align:right">0.4%</div>             </div>         </div>     </div></div>`)[0];
-                popup_1d6a964285cd853680b24e79baa38a74.setContent(html_2bc1962e422c0a64e6d1b4ed20f7df64);
-            
-        
-
-        geo_json_98b40b7ecc4279f3f4b59b9bea0f4957.bindPopup(popup_1d6a964285cd853680b24e79baa38a74)
-        ;
-
-        
-    
-    
-            geo_json_98b40b7ecc4279f3f4b59b9bea0f4957.addTo(map_688e524207fb1e7b8eff3c60348f41cc);
-        
-    
-        function geo_json_10f4b77295f8430a97f614c017cdb8e3_styler(feature) {
-            switch(feature.id) {
-                default:
-                    return {"color": "white", "fillColor": "#a7cca8", "fillOpacity": 0.85, "weight": 2};
-            }
-        }
-        function geo_json_10f4b77295f8430a97f614c017cdb8e3_highlighter(feature) {
-            switch(feature.id) {
-                default:
-                    return {"color": "#333", "fillOpacity": 1.0, "weight": 3};
-            }
-        }
-
-        function geo_json_10f4b77295f8430a97f614c017cdb8e3_onEachFeature(feature, layer) {
-
-            layer.on({
-                mouseout: function(e) {
-                    if(typeof e.target.setStyle === "function"){
-                            geo_json_10f4b77295f8430a97f614c017cdb8e3.resetStyle(e.target);
-                    }
-                },
-                mouseover: function(e) {
-                    if(typeof e.target.setStyle === "function"){
-                        const highlightStyle = geo_json_10f4b77295f8430a97f614c017cdb8e3_highlighter(e.target.feature)
-                        e.target.setStyle(highlightStyle);
-                    }
-                },
-            });
-        };
-        var geo_json_10f4b77295f8430a97f614c017cdb8e3 = L.geoJson(null, {
-                onEachFeature: geo_json_10f4b77295f8430a97f614c017cdb8e3_onEachFeature,
-            
-                style: geo_json_10f4b77295f8430a97f614c017cdb8e3_styler,
-            ...{
-}
+        // Popup wird hier dynamisch vor dem Öffnen befüllt
+        let popup = L.popup({"maxWidth": 300});
+        geojsonObj.bindPopup(popup);
+        geojsonObj.on('popupopen', function() {
+            popup.setContent(generateDynamicPopupHtml(countryName));
         });
 
-        function geo_json_10f4b77295f8430a97f614c017cdb8e3_add (data) {
-            geo_json_10f4b77295f8430a97f614c017cdb8e3
-                .addData(data);
-        }
-            geo_json_10f4b77295f8430a97f614c017cdb8e3_add({"features": [{"geometry": {"coordinates": [[[11.027369, 58.856149], [11.468272, 59.432393], [12.300366, 60.117933], [12.631147, 61.293572], [11.992064, 61.800362], [11.930569, 63.128318], [12.579935, 64.066219], [13.571916, 64.049114], [13.919905, 64.445421], [13.55569, 64.787028], [15.108411, 66.193867], [16.108712, 67.302456], [16.768879, 68.013937], [17.729182, 68.010552], [17.993868, 68.567391], [19.87856, 68.407194], [20.025269, 69.065139], [20.645593, 69.106247], [21.978535, 68.616846], [23.539473, 67.936009], [23.56588, 66.396051], [23.903379, 66.006927], [22.183173, 65.723741], [21.213517, 65.026005], [21.369631, 64.413588], [19.778876, 63.609554], [17.847779, 62.7494], [17.119555, 61.341166], [17.831346, 60.636583], [18.787722, 60.081914], [17.869225, 58.953766], [16.829185, 58.719827], [16.44771, 57.041118], [15.879786, 56.104302], [14.666681, 56.200885], [14.100721, 55.407781], [12.942911, 55.361737], [12.625101, 56.30708], [11.787942, 57.441817], [11.027369, 58.856149]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+        geojsonObj.addTo(map_688e524207fb1e7b8eff3c60348f41cc);
+        mapLayers[countryName] = geojsonObj; // Speichern für dynamisches Einfärben
+    }
 
-        
-    
-            geo_json_10f4b77295f8430a97f614c017cdb8e3.bindTooltip(
-                `<div style="font-family:\u0027Segoe UI\u0027,sans-serif;font-size:13px">
-                     <b>Sweden</b> · Click for details
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-        var popup_f6827069a473ee88e353c9562e70a5ad = L.popup({
-  "maxWidth": 300,
-});
-
-        
-            
-                var html_d1388e5bf1ccf7a583ae3faf09d30e27 = $(`<div id="html_d1388e5bf1ccf7a583ae3faf09d30e27" style="width: 100.0%; height: 100.0%;">     <div style="font-family:'Segoe UI',system-ui,sans-serif;width:280px;padding:4px">       <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid #3b82f6">         <span style="font-size:30px">🇸🇪</span>         <div>           <div style="font-size:19px;font-weight:700;color:#1a1a1a">Sweden</div>           <div style="font-size:11px;color:#888">Nordic Country · 2025 Data</div>         </div>       </div>       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">                  <div style="background:#f8f9fa;border-radius:8px;padding:10px 12px;border-left:3px solid #3b82f6">           <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;margin-bottom:3px">😊 Happiness</div>           <div style="font-size:19px;font-weight:700;color:#1a1a1a">7.35 <span style="font-size:12px;font-weight:400;color:#888">/ 10</span></div>           <div style="font-size:9px;color:#bbb;margin-top:1px">World Happiness Report 2025</div>         </div>         <div style="background:#f8f9fa;border-radius:8px;padding:10px 12px;border-left:3px solid #3b82f6">           <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;margin-bottom:3px">☀️ Sunshine</div>           <div style="font-size:19px;font-weight:700;color:#1a1a1a">1821 <span style="font-size:12px;font-weight:400;color:#888">h/yr</span></div>           <div style="font-size:9px;color:#bbb;margin-top:1px">weather-and-climate.com</div>         </div>         <div style="background:#f8f9fa;border-radius:8px;padding:10px 12px;border-left:3px solid #3b82f6">           <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;margin-bottom:3px">⚡ EV Share</div>           <div style="font-size:19px;font-weight:700;color:#1a1a1a">60 <span style="font-size:12px;font-weight:400;color:#888">%</span></div>           <div style="font-size:9px;color:#bbb;margin-top:1px">ICCT Jan–May 2025</div>         </div>         <div style="background:#f8f9fa;border-radius:8px;padding:10px 12px;border-left:3px solid #3b82f6">           <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;margin-bottom:3px">🌿 Renewables</div>           <div style="font-size:19px;font-weight:700;color:#1a1a1a">64.7 <span style="font-size:12px;font-weight:400;color:#888">%</span></div>           <div style="font-size:9px;color:#bbb;margin-top:1px">Eurostat/EEA 2022</div>         </div>       </div>            </div></div>`)[0];
-                popup_f6827069a473ee88e353c9562e70a5ad.setContent(html_d1388e5bf1ccf7a583ae3faf09d30e27);
-            
-        
-
-        geo_json_10f4b77295f8430a97f614c017cdb8e3.bindPopup(popup_f6827069a473ee88e353c9562e70a5ad)
-        ;
-
-        
-    
-    
-            geo_json_10f4b77295f8430a97f614c017cdb8e3.addTo(map_688e524207fb1e7b8eff3c60348f41cc);
-        
-    
-        function geo_json_d04a86786a5a37dd00508d92af384dd4_styler(feature) {
-            switch(feature.id) {
-                default:
-                    return {"color": "white", "fillColor": "#82af84", "fillOpacity": 0.85, "weight": 2};
-            }
-        }
-        function geo_json_d04a86786a5a37dd00508d92af384dd4_highlighter(feature) {
-            switch(feature.id) {
-                default:
-                    return {"color": "#333", "fillOpacity": 1.0, "weight": 3};
-            }
-        }
-
-        function geo_json_d04a86786a5a37dd00508d92af384dd4_onEachFeature(feature, layer) {
-
-            layer.on({
-                mouseout: function(e) {
-                    if(typeof e.target.setStyle === "function"){
-                            geo_json_d04a86786a5a37dd00508d92af384dd4.resetStyle(e.target);
-                    }
-                },
-                mouseover: function(e) {
-                    if(typeof e.target.setStyle === "function"){
-                        const highlightStyle = geo_json_d04a86786a5a37dd00508d92af384dd4_highlighter(e.target.feature)
-                        e.target.setStyle(highlightStyle);
-                    }
-                },
-            });
-        };
-        var geo_json_d04a86786a5a37dd00508d92af384dd4 = L.geoJson(null, {
-                onEachFeature: geo_json_d04a86786a5a37dd00508d92af384dd4_onEachFeature,
-            
-                style: geo_json_d04a86786a5a37dd00508d92af384dd4_styler,
-            ...{
-}
+    // Erstellung der einzelnen Länder-GeoJSONs — lade echte Norwegen-Geometrie von GitHub
+    (function loadNorwayGeoJSON() {
+      const url = 'https://raw.githubusercontent.com/johan/world.geo.json/master/countries/NOR.geo.json';
+      fetch(url)
+        .then(r => r.json())
+        .then(data => {
+          const feat = Array.isArray(data.features) ? data.features[0] : data;
+          // Erzeuge Layer aus dem Feature (Leaflet akzeptiert Feature oder FeatureCollection)
+          const norwayLayer = L.geoJson(feat);
+          setupGeoJsonLayer(norwayLayer, 'Norway', (COLORS[currentInd] && COLORS[currentInd].Norway) || '#b2d5b3');
+          // optional: adjust map view to include Norway nicely
+          try {
+            map_688e524207fb1e7b8eff3c60348f41cc.fitBounds(norwayLayer.getBounds(), {padding: [20,20]});
+          } catch (e) { /* ignore if bounds unavailable */ }
+        })
+        .catch(err => {
+          console.error('Failed to load Norway GeoJSON:', err);
         });
+    })();
 
-        function geo_json_d04a86786a5a37dd00508d92af384dd4_add (data) {
-            geo_json_d04a86786a5a37dd00508d92af384dd4
-                .addData(data);
-        }
-            geo_json_d04a86786a5a37dd00508d92af384dd4_add({"features": [{"geometry": {"coordinates": [[[[9.921906, 54.983104], [9.282049, 54.830865], [8.526229, 54.962744], [8.120311, 55.517723], [8.089977, 56.540012], [8.256582, 56.809969], [8.543438, 57.110003], [9.424469, 57.172066], [9.775559, 57.447941], [10.580006, 57.730017], [10.546106, 57.215733], [10.25, 56.890016], [10.369993, 56.609982], [10.912182, 56.458621], [10.667804, 56.081383], [10.369993, 56.190007], [9.649985, 55.469999], [9.921906, 54.983104]]], [[[12.370904, 56.111407], [12.690006, 55.609991], [12.089991, 54.800015], [11.043543, 55.364864], [10.903914, 55.779955], [12.370904, 56.111407]]]], "type": "MultiPolygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
+    var geo_sweden = L.geoJson({
+      "type": "FeatureCollection",
+      "features": [{
+        "type": "Feature",
+        "properties": {"id": "Sweden"},
+        "geometry": {"coordinates": [[[11.027369, 58.856149], [11.468272, 59.432393], [12.300366, 60.117933], [12.631147, 61.293572], [11.992064, 61.800362], [11.930569, 63.128318], [12.579935, 64.066219], [13.571916, 64.049114], [13.919905, 64.445421], [13.55569, 64.787028], [15.108411, 66.193867], [16.108712, 67.302456], [16.768879, 68.013937], [17.729182, 68.010552], [17.799386, 68.567391], [19.87856, 68.407194], [20.025269, 69.065139], [20.645593, 69.106247], [21.978535, 68.616846], [23.539473, 67.936009], [23.56588, 66.396051], [23.903379, 66.006927], [22.183173, 65.723741], [21.213517, 65.026005], [21.369631, 64.413588], [19.778876, 63.609554], [17.847779, 62.7494], [17.119555, 61.341166], [17.831346, 60.636583], [18.787722, 60.081914], [17.869225, 58.953766], [16.829185, 58.719827], [16.44771, 57.041118], [15.879786, 56.104302], [14.666681, 56.200885], [14.100721, 55.407781], [12.942911, 55.361737], [12.625101, 56.30708], [11.787942, 57.441817], [11.027369, 58.856149]]], "type": "Polygon"}
+      }]
+    });
+    setupGeoJsonLayer(geo_sweden, "Sweden", "#a7cca8");
 
-        
-    
-            geo_json_d04a86786a5a37dd00508d92af384dd4.bindTooltip(
-                `<div style="font-family:\u0027Segoe UI\u0027,sans-serif;font-size:13px">
-                     <b>Denmark</b> · Click for details
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-        var popup_587765e972373ee9c4400845ac4a7325 = L.popup({
-  "maxWidth": 300,
-});
+    var geo_denmark = L.geoJson({
+      "type": "FeatureCollection",
+      "features": [{
+        "type": "Feature",
+        "properties": {"id": "Denmark"},
+        "geometry": {"coordinates": [[[[9.921906, 54.983104], [9.282049, 54.830865], [8.526229, 54.962744], [8.120311, 55.517723], [8.089977, 56.540012], [8.256582, 56.809969], [8.543438, 57.110003], [9.424469, 57.172066], [9.775559, 57.447941], [10.580006, 57.730017], [10.546106, 57.215733], [10.25, 56.890016], [10.369993, 56.609982], [10.912182, 56.458621], [10.667804, 56.081383], [10.369993, 56.190007], [9.649985, 55.469999], [9.921906, 54.983104]]], [[[12.370904, 56.111407], [12.690006, 55.609991], [12.089991, 54.800015], [11.043543, 55.364864], [10.903914, 55.779955], [12.370904, 56.111407]]]], "type": "MultiPolygon"}
+      }]
+    });
+    setupGeoJsonLayer(geo_denmark, "Denmark", "#82af84");
 
-        
-            
-                var html_aa0fffed35832502d0006b299a198004 = $(`<div id="html_aa0fffed35832502d0006b299a198004" style="width: 100.0%; height: 100.0%;">     <div style="font-family:'Segoe UI',system-ui,sans-serif;width:280px;padding:4px">       <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid #f59e0b">         <span style="font-size:30px">🇩🇰</span>         <div>           <div style="font-size:19px;font-weight:700;color:#1a1a1a">Denmark</div>           <div style="font-size:11px;color:#888">Nordic Country · 2025 Data</div>         </div>       </div>       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">                  <div style="background:#f8f9fa;border-radius:8px;padding:10px 12px;border-left:3px solid #f59e0b">           <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;margin-bottom:3px">😊 Happiness</div>           <div style="font-size:19px;font-weight:700;color:#1a1a1a">7.52 <span style="font-size:12px;font-weight:400;color:#888">/ 10</span></div>           <div style="font-size:9px;color:#bbb;margin-top:1px">World Happiness Report 2025</div>         </div>         <div style="background:#f8f9fa;border-radius:8px;padding:10px 12px;border-left:3px solid #f59e0b">           <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;margin-bottom:3px">☀️ Sunshine</div>           <div style="font-size:19px;font-weight:700;color:#1a1a1a">1629 <span style="font-size:12px;font-weight:400;color:#888">h/yr</span></div>           <div style="font-size:9px;color:#bbb;margin-top:1px">weather-and-climate.com</div>         </div>         <div style="background:#f8f9fa;border-radius:8px;padding:10px 12px;border-left:3px solid #f59e0b">           <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;margin-bottom:3px">⚡ EV Share</div>           <div style="font-size:19px;font-weight:700;color:#1a1a1a">66 <span style="font-size:12px;font-weight:400;color:#888">%</span></div>           <div style="font-size:9px;color:#bbb;margin-top:1px">ICCT Jan–May 2025</div>         </div>         <div style="background:#f8f9fa;border-radius:8px;padding:10px 12px;border-left:3px solid #f59e0b">           <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;margin-bottom:3px">🌿 Renewables</div>           <div style="font-size:19px;font-weight:700;color:#1a1a1a">36.7 <span style="font-size:12px;font-weight:400;color:#888">%</span></div>           <div style="font-size:9px;color:#bbb;margin-top:1px">Eurostat/EEA 2022</div>         </div>       </div>            </div></div>`)[0];
-                popup_587765e972373ee9c4400845ac4a7325.setContent(html_aa0fffed35832502d0006b299a198004);
-            
-        
+    var geo_iceland = L.geoJson({
+      "type": "FeatureCollection",
+      "features": [{
+        "type": "Feature",
+        "properties": {"id": "Iceland"},
+        "geometry": {"coordinates": [[[-14.508695, 66.455892], [-14.739637, 65.808748], [-13.609732, 65.126671], [-14.909834, 64.364082], [-17.794438, 63.678749], [-18.656246, 63.496383], [-19.972755, 63.643635], [-22.762972, 63.960179], [-21.778484, 64.402116], [-23.955044, 64.89113], [-22.184403, 65.084968], [-22.227423, 65.378594], [-24.326184, 65.611189], [-23.650515, 66.262519], [-22.134922, 66.410469], [-20.576284, 65.732112], [-19.056842, 66.276601], [-17.798624, 65.993853], [-16.167819, 66.526792], [-14.508695, 66.455892]]], "type": "Polygon"}
+      }]
+    });
+    setupGeoJsonLayer(geo_iceland, "Iceland", "#82af84");
 
-        geo_json_d04a86786a5a37dd00508d92af384dd4.bindPopup(popup_587765e972373ee9c4400845ac4a7325)
-        ;
+    var geo_finland = L.geoJson({
+      "type": "FeatureCollection",
+      "features": [{
+        "type": "Feature",
+        "properties": {"id": "Finland"},
+        "geometry": {"coordinates": [[[28.59193, 69.064777], [28.445944, 68.364613], [29.977426, 67.698297], [29.054589, 66.944286], [30.21765, 65.80598], [29.54443, 64.948672], [30.444685, 64.204453], [30.035872, 63.552814], [31.516092, 62.867687], [31.139991, 62.357693], [30.211107, 61.780028], [28.07, 60.50352], [28.070002, 60.503519], [28.069998, 60.503517], [26.255173, 60.423961], [24.496624, 60.057316], [22.869695, 59.846373], [22.290764, 60.391921], [21.322244, 60.72017], [21.544866, 61.705329], [21.059211, 62.607393], [21.536029, 63.189735], [22.442744, 63.81781], [24.730512, 64.902344], [25.398068, 65.111427], [25.294043, 65.534346], [23.903379, 66.006927], [23.56588, 66.396051], [23.539473, 67.936009], [21.978535, 68.616846], [20.645593, 69.106247], [21.244936, 69.370443], [22.356238, 68.841741], [23.66205, 68.891247], [24.735679, 68.649557], [25.689213, 69.092114], [26.179622, 69.825299], [27.732292, 70.164193], [29.015573, 69.766491], [28.59193, 69.064777]]], "type": "Polygon"}
+      }]
+    });
+    setupGeoJsonLayer(geo_finland, "Finland", "#538a56");
 
-        
-    
-    
-            geo_json_d04a86786a5a37dd00508d92af384dd4.addTo(map_688e524207fb1e7b8eff3c60348f41cc);
-        
-    
-        function geo_json_7d45f9b9b297397251c1f4ff33d757bf_styler(feature) {
-            switch(feature.id) {
-                default:
-                    return {"color": "white", "fillColor": "#82af84", "fillOpacity": 0.85, "weight": 2};
-            }
-        }
-        function geo_json_7d45f9b9b297397251c1f4ff33d757bf_highlighter(feature) {
-            switch(feature.id) {
-                default:
-                    return {"color": "#333", "fillOpacity": 1.0, "weight": 3};
-            }
-        }
-
-        function geo_json_7d45f9b9b297397251c1f4ff33d757bf_onEachFeature(feature, layer) {
-
-            layer.on({
-                mouseout: function(e) {
-                    if(typeof e.target.setStyle === "function"){
-                            geo_json_7d45f9b9b297397251c1f4ff33d757bf.resetStyle(e.target);
-                    }
-                },
-                mouseover: function(e) {
-                    if(typeof e.target.setStyle === "function"){
-                        const highlightStyle = geo_json_7d45f9b9b297397251c1f4ff33d757bf_highlighter(e.target.feature)
-                        e.target.setStyle(highlightStyle);
-                    }
-                },
-            });
-        };
-        var geo_json_7d45f9b9b297397251c1f4ff33d757bf = L.geoJson(null, {
-                onEachFeature: geo_json_7d45f9b9b297397251c1f4ff33d757bf_onEachFeature,
-            
-                style: geo_json_7d45f9b9b297397251c1f4ff33d757bf_styler,
-            ...{
-}
-        });
-
-        function geo_json_7d45f9b9b297397251c1f4ff33d757bf_add (data) {
-            geo_json_7d45f9b9b297397251c1f4ff33d757bf
-                .addData(data);
-        }
-            geo_json_7d45f9b9b297397251c1f4ff33d757bf_add({"features": [{"geometry": {"coordinates": [[[-14.508695, 66.455892], [-14.739637, 65.808748], [-13.609732, 65.126671], [-14.909834, 64.364082], [-17.794438, 63.678749], [-18.656246, 63.496383], [-19.972755, 63.643635], [-22.762972, 63.960179], [-21.778484, 64.402116], [-23.955044, 64.89113], [-22.184403, 65.084968], [-22.227423, 65.378594], [-24.326184, 65.611189], [-23.650515, 66.262519], [-22.134922, 66.410469], [-20.576284, 65.732112], [-19.056842, 66.276601], [-17.798624, 65.993853], [-16.167819, 66.526792], [-14.508695, 66.455892]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
-
-        
-    
-            geo_json_7d45f9b9b297397251c1f4ff33d757bf.bindTooltip(
-                `<div style="font-family:\u0027Segoe UI\u0027,sans-serif;font-size:13px">
-                     <b>Iceland</b> · Click for details
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-        var popup_ebfce3fe864aee3c9d45147ef70a1e30 = L.popup({
-  "maxWidth": 300,
-});
-
-        
-            
-                var html_3d86797d1c5e17922303553eafd2e2ff = $(`<div id="html_3d86797d1c5e17922303553eafd2e2ff" style="width: 100.0%; height: 100.0%;">     <div style="font-family:'Segoe UI',system-ui,sans-serif;width:280px;padding:4px">       <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid #8b5cf6">         <span style="font-size:30px">🇮🇸</span>         <div>           <div style="font-size:19px;font-weight:700;color:#1a1a1a">Iceland</div>           <div style="font-size:11px;color:#888">Nordic Country · 2025 Data</div>         </div>       </div>       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">                  <div style="background:#f8f9fa;border-radius:8px;padding:10px 12px;border-left:3px solid #8b5cf6">           <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;margin-bottom:3px">😊 Happiness</div>           <div style="font-size:19px;font-weight:700;color:#1a1a1a">7.52 <span style="font-size:12px;font-weight:400;color:#888">/ 10</span></div>           <div style="font-size:9px;color:#bbb;margin-top:1px">World Happiness Report 2025</div>         </div>         <div style="background:#f8f9fa;border-radius:8px;padding:10px 12px;border-left:3px solid #8b5cf6">           <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;margin-bottom:3px">☀️ Sunshine</div>           <div style="font-size:19px;font-weight:700;color:#1a1a1a">1268 <span style="font-size:12px;font-weight:400;color:#888">h/yr</span></div>           <div style="font-size:9px;color:#bbb;margin-top:1px">weather-and-climate.com</div>         </div>         <div style="background:#f8f9fa;border-radius:8px;padding:10px 12px;border-left:3px solid #8b5cf6">           <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;margin-bottom:3px">⚡ EV Share</div>           <div style="font-size:19px;font-weight:700;color:#1a1a1a">51 <span style="font-size:12px;font-weight:400;color:#888">%</span></div>           <div style="font-size:9px;color:#bbb;margin-top:1px">ICCT Jan–May 2025</div>         </div>         <div style="background:#f8f9fa;border-radius:8px;padding:10px 12px;border-left:3px solid #8b5cf6">           <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;margin-bottom:3px">🌿 Renewables</div>           <div style="font-size:19px;font-weight:700;color:#1a1a1a">79.5 <span style="font-size:12px;font-weight:400;color:#888">%</span></div>           <div style="font-size:9px;color:#bbb;margin-top:1px">Eurostat/EEA 2022</div>         </div>       </div>            </div></div>`)[0];
-                popup_ebfce3fe864aee3c9d45147ef70a1e30.setContent(html_3d86797d1c5e17922303553eafd2e2ff);
-            
-        
-
-        geo_json_7d45f9b9b297397251c1f4ff33d757bf.bindPopup(popup_ebfce3fe864aee3c9d45147ef70a1e30)
-        ;
-
-        
-    
-    
-            geo_json_7d45f9b9b297397251c1f4ff33d757bf.addTo(map_688e524207fb1e7b8eff3c60348f41cc);
-        
-    
-        function geo_json_34a132c07b6c8cfb48ca147769cf1be7_styler(feature) {
-            switch(feature.id) {
-                default:
-                    return {"color": "white", "fillColor": "#538a56", "fillOpacity": 0.85, "weight": 2};
-            }
-        }
-        function geo_json_34a132c07b6c8cfb48ca147769cf1be7_highlighter(feature) {
-            switch(feature.id) {
-                default:
-                    return {"color": "#333", "fillOpacity": 1.0, "weight": 3};
-            }
-        }
-
-        function geo_json_34a132c07b6c8cfb48ca147769cf1be7_onEachFeature(feature, layer) {
-
-            layer.on({
-                mouseout: function(e) {
-                    if(typeof e.target.setStyle === "function"){
-                            geo_json_34a132c07b6c8cfb48ca147769cf1be7.resetStyle(e.target);
-                    }
-                },
-                mouseover: function(e) {
-                    if(typeof e.target.setStyle === "function"){
-                        const highlightStyle = geo_json_34a132c07b6c8cfb48ca147769cf1be7_highlighter(e.target.feature)
-                        e.target.setStyle(highlightStyle);
-                    }
-                },
-            });
-        };
-        var geo_json_34a132c07b6c8cfb48ca147769cf1be7 = L.geoJson(null, {
-                onEachFeature: geo_json_34a132c07b6c8cfb48ca147769cf1be7_onEachFeature,
-            
-                style: geo_json_34a132c07b6c8cfb48ca147769cf1be7_styler,
-            ...{
-}
-        });
-
-        function geo_json_34a132c07b6c8cfb48ca147769cf1be7_add (data) {
-            geo_json_34a132c07b6c8cfb48ca147769cf1be7
-                .addData(data);
-        }
-            geo_json_34a132c07b6c8cfb48ca147769cf1be7_add({"features": [{"geometry": {"coordinates": [[[28.59193, 69.064777], [28.445944, 68.364613], [29.977426, 67.698297], [29.054589, 66.944286], [30.21765, 65.80598], [29.54443, 64.948672], [30.444685, 64.204453], [30.035872, 63.552814], [31.516092, 62.867687], [31.139991, 62.357693], [30.211107, 61.780028], [28.07, 60.50352], [28.070002, 60.503519], [28.069998, 60.503517], [26.255173, 60.423961], [24.496624, 60.057316], [22.869695, 59.846373], [22.290764, 60.391921], [21.322244, 60.72017], [21.544866, 61.705329], [21.059211, 62.607393], [21.536029, 63.189735], [22.442744, 63.81781], [24.730512, 64.902344], [25.398068, 65.111427], [25.294043, 65.534346], [23.903379, 66.006927], [23.56588, 66.396051], [23.539473, 67.936009], [21.978535, 68.616846], [20.645593, 69.106247], [21.244936, 69.370443], [22.356238, 68.841741], [23.66205, 68.891247], [24.735679, 68.649557], [25.689213, 69.092114], [26.179622, 69.825299], [27.732292, 70.164193], [29.015573, 69.766491], [28.59193, 69.064777]]], "type": "Polygon"}, "id": "0", "type": "Feature"}], "type": "FeatureCollection"});
-
-        
-    
-            geo_json_34a132c07b6c8cfb48ca147769cf1be7.bindTooltip(
-                `<div style="font-family:\u0027Segoe UI\u0027,sans-serif;font-size:13px">
-                     <b>Finland</b> · Click for details
-                 </div>`,
-                {
-  "sticky": true,
-}
-            );
-        
-    
-        var popup_2b785eb55d9090df417288fa0a697745 = L.popup({
-  "maxWidth": 300,
-});
-
-        
-            
-                var html_2a956c08db21b940c137e6cc5e91cc58 = $(`<div id="html_2a956c08db21b940c137e6cc5e91cc58" style="width: 100.0%; height: 100.0%;">     <div style="font-family:'Segoe UI',system-ui,sans-serif;width:280px;padding:4px">       <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;padding-bottom:10px;border-bottom:2px solid #10b981">         <span style="font-size:30px">🇫🇮</span>         <div>           <div style="font-size:19px;font-weight:700;color:#1a1a1a">Finland</div>           <div style="font-size:11px;color:#888">Nordic Country · 2025 Data</div>         </div>       </div>       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">                  <div style="background:#f8f9fa;border-radius:8px;padding:10px 12px;border-left:3px solid #10b981">           <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;margin-bottom:3px">😊 Happiness</div>           <div style="font-size:19px;font-weight:700;color:#1a1a1a">7.74 <span style="font-size:12px;font-weight:400;color:#888">/ 10</span></div>           <div style="font-size:9px;color:#bbb;margin-top:1px">World Happiness Report 2025</div>         </div>         <div style="background:#f8f9fa;border-radius:8px;padding:10px 12px;border-left:3px solid #10b981">           <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;margin-bottom:3px">☀️ Sunshine</div>           <div style="font-size:19px;font-weight:700;color:#1a1a1a">1838 <span style="font-size:12px;font-weight:400;color:#888">h/yr</span></div>           <div style="font-size:9px;color:#bbb;margin-top:1px">weather-and-climate.com</div>         </div>         <div style="background:#f8f9fa;border-radius:8px;padding:10px 12px;border-left:3px solid #10b981">           <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;margin-bottom:3px">⚡ EV Share</div>           <div style="font-size:19px;font-weight:700;color:#1a1a1a">56 <span style="font-size:12px;font-weight:400;color:#888">%</span></div>           <div style="font-size:9px;color:#bbb;margin-top:1px">ICCT Jan–May 2025</div>         </div>         <div style="background:#f8f9fa;border-radius:8px;padding:10px 12px;border-left:3px solid #10b981">           <div style="font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#888;margin-bottom:3px">🌿 Renewables</div>           <div style="font-size:19px;font-weight:700;color:#1a1a1a">43.7 <span style="font-size:12px;font-weight:400;color:#888">%</span></div>           <div style="font-size:9px;color:#bbb;margin-top:1px">Eurostat/EEA 2022</div>         </div>       </div>            </div></div>`)[0];
-                popup_2b785eb55d9090df417288fa0a697745.setContent(html_2a956c08db21b940c137e6cc5e91cc58);
-            
-        
-
-        geo_json_34a132c07b6c8cfb48ca147769cf1be7.bindPopup(popup_2b785eb55d9090df417288fa0a697745)
-        ;
-
-        
-    
-    
-            geo_json_34a132c07b6c8cfb48ca147769cf1be7.addTo(map_688e524207fb1e7b8eff3c60348f41cc);
-        
+    // Initiale Befüllung der Seitenleiste beim ersten Laden
+    window.addEventListener('load', function() {
+        updateSidebar();
+    });
 </script>
+</body>
 </html>
